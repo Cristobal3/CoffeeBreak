@@ -1,6 +1,6 @@
 # CoffeeBreak
 
-Android app using Java & Android Studio
+Android app using Java & Android Studio. Works on Android version 5.0(Lolipop) and up. Screenshots provided are both from emulation and a physical Samsung Galaxy.
 
 ### Purpose: 
 A down-time app designed to quickly inform the user of the top US news headlines and serve as a notetaker for reminders.
@@ -17,7 +17,14 @@ Image scaling was done using GIMP. Logo and buttons arranged through the use of 
 ## Page 1: "Latest News"
 The first page of the app uses an API call from newsapi.org, a website that delivers top headlines from news outlets (New York Times, The Washington Post, etc.). The view is acheived using a combination of nested "Linear", "Relative" and "Scroll" view layouts contructed in XML. The text extracted from the JSON is fed to TextViews placed inside two "Scroll" views that each take one half of the available screen space.
 
-![page1](https://user-images.githubusercontent.com/36170390/40931624-4ccc010c-67f1-11e8-8a93-a29f869117db.png)
+![npage1](https://user-images.githubusercontent.com/36170390/41008033-5989ff4a-68ee-11e8-81a2-d91f50693ddc.png)
+
+![npage1_2](https://user-images.githubusercontent.com/36170390/41008064-876e7c7e-68ee-11e8-8059-829a03880eef.png)
+
+![npage1_3](https://user-images.githubusercontent.com/36170390/41008096-b2a2d034-68ee-11e8-8329-1a5562b06797.png)
+
+
+The search bar at the top of the page allows the user to look for news in other countries made available by the API. The input of the search bar is fed through a function that identifies the country by name and finds the apropiate country code to use for the API call.
 
 This was acheived by having the entry point of the page run an API fetch method from a child class that extends from "AsyncTask," a helper class that alows for background operations. As soon as the "onCreate" method is initiated(the entry point of the page) the API call is executed and later loaded after all the page elements have been rendered. With page elements(TextView, EditText, ProgressBar) publicly defined in the parent class, the child methods are able to successfully update the Android page with the information. The API "fetch" code is pictured below.
 
