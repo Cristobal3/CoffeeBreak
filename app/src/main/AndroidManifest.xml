@@ -23,8 +23,9 @@
                 android:value="com.example.myfirstapp.MainActivity" />
         </activity>
         <activity android:name=".Page1"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".MainActivity"></activity>
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:parentActivityName=".MainActivity">
+    </activity>
     </application>
 
 </manifest>

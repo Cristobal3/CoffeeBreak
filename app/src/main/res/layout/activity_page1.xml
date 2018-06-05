@@ -15,14 +15,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:hint="Enter country code"/>
+        android:hint="Enter country or 2 letter country code"/>
     <Button
         android:id="@+id/queryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:text="Search"/>
+        android:text="Search" />
 
     <TextView
         android:layout_width="match_parent"
@@ -159,7 +159,8 @@
             android:layout_gravity="center"
             android:text="Custom News"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            tools:ignore="RtlCompat" />
         <ScrollView
             android:layout_width="324dp"
             android:layout_height="220dp"

@@ -20,6 +20,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Page1 extends Activity {
@@ -93,6 +97,83 @@ public class Page1 extends Activity {
         new preNews().execute();
     }
 
+    public String check (String input) {
+
+        Map<String, String> country = new HashMap<>();
+        country.put("united arab emirates", "ae");
+        country.put("argentina", "ar");
+        country.put("austria", "au");
+        country.put("belgium", "be");
+        country.put("bulgaria", "bg");
+        country.put("brazil", "br");
+        country.put("canada", "ca");
+        country.put("switzerland", "ch");
+        country.put("china", "cn");
+        country.put("colombia", "co");
+        country.put("cuba", "cu");
+        country.put("czechia", "cz");
+        country.put("germany", "de");
+        country.put("egypt", "eg");
+        country.put("france", "fr");
+        country.put("united kingdom", "gb");
+        country.put("great britain", "gb");
+        country.put("britain", "gb");
+        country.put("greece", "gr");
+        country.put("hong kong", "hk");
+        country.put("hungary", "hu");
+        country.put("indonesia", "id");
+        country.put("ireland", "ie");
+        country.put("israel", "il");
+        country.put("india", "in");
+        country.put("italy", "it");
+        country.put("japan", "jp");
+        country.put("korea", "kr");
+        country.put("lithuania", "lt");
+        country.put("latvia", "lv");
+        country.put("morocco", "ma");
+        country.put("mexico", "mx");
+        country.put("malaysia", "my");
+        country.put("nigeria", "ng");
+        country.put("netherlands", "nl");
+        country.put("norway", "no");
+        country.put("new zealand", "nz");
+        country.put("philippines", "ph");
+        country.put("poland", "pl");
+        country.put("portugal", "pt");
+        country.put("romania", "ro");
+        country.put("serbia", "rs");
+        country.put("russia", "ru");
+        country.put("saudi arabia", "sa");
+        country.put("sweden", "se");
+        country.put("singapore", "sg");
+        country.put("slovenia", "si");
+        country.put("slovakia", "sk");
+        country.put("thailand", "th");
+        country.put("turkey", "tr");
+        country.put("taiwan", "tw");
+        country.put("ukraine", "ua");
+        country.put("united states", "us");
+        country.put("venezuela", "ve");
+        country.put("south africa", "za");
+
+
+        System.out.println("1. Is key 'apple' exists?");
+        if (country.containsKey(input)) {
+            //key exists
+            return country.get(input);
+        } else {
+            //key does not exists
+            System.out.println("no!");
+        }
+        return input;
+    }
+
+    public boolean containsIllegals(String toExamine) {
+        Pattern pattern = Pattern.compile("[~#@*+%{}<>\\[\\]|\"\\_^1234567890]");
+        Matcher matcher = pattern.matcher(toExamine);
+        return matcher.find();
+    }
+
 
     class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
 
@@ -104,8 +185,9 @@ public class Page1 extends Activity {
         }
 
         protected String doInBackground(Void... urls) {
-            String email = emailText.getText().toString();
+            String input = emailText.getText().toString().toLowerCase();
             // Do some validation here
+            String email = check(input);
 
             try {
                 URL url = new URL(API_URL + email + "&apiKey=" + API_KEY);
@@ -140,25 +222,25 @@ public class Page1 extends Activity {
                         try {
                 JSONObject object =  new JSONObject(response);
 
-                String articleTitle = object.getJSONArray("articles").getJSONObject(0).getString("title");
+                String articleTitle = object.getJSONArray("articles").getJSONObject(0).getString("title") ;
 
-                String body = object.getJSONArray("articles").getJSONObject(0).getString("description");
+                String body = object.getJSONArray("articles").getJSONObject(0).getString("description") + "       SOURCE: " + object.getJSONArray("articles").getJSONObject(0).getJSONObject("source").getString("name");
 
-                String articleTitle2 = object.getJSONArray("articles").getJSONObject(1).getString("title");
+                String articleTitle2 = object.getJSONArray("articles").getJSONObject(1).getString("title") ;
 
-                String body2 = object.getJSONArray("articles").getJSONObject(1).getString("description");
+                String body2 = object.getJSONArray("articles").getJSONObject(1).getString("description") + "       SOURCE: " + object.getJSONArray("articles").getJSONObject(0).getJSONObject("source").getString("name");
 
-                            String articleTitle3 = object.getJSONArray("articles").getJSONObject(2).getString("title");
+                            String articleTitle3 = object.getJSONArray("articles").getJSONObject(2).getString("title") ;
 
-                            String body3 = object.getJSONArray("articles").getJSONObject(2).getString("description");
+                            String body3 = object.getJSONArray("articles").getJSONObject(2).getString("description") + "       SOURCE: " + object.getJSONArray("articles").getJSONObject(0).getJSONObject("source").getString("name");
 
-                            String articleTitle4 = object.getJSONArray("articles").getJSONObject(3).getString("title");
+                            String articleTitle4 = object.getJSONArray("articles").getJSONObject(3).getString("title") ;
 
-                            String body4 = object.getJSONArray("articles").getJSONObject(3).getString("description");
+                            String body4 = object.getJSONArray("articles").getJSONObject(3).getString("description") + "       SOURCE: " + object.getJSONArray("articles").getJSONObject(0).getJSONObject("source").getString("name");
 
-                            String articleTitle5 = object.getJSONArray("articles").getJSONObject(4).getString("title");
+                            String articleTitle5 = object.getJSONArray("articles").getJSONObject(4).getString("title") ;
 
-                            String body5 = object.getJSONArray("articles").getJSONObject(4).getString("description");
+                            String body5 = object.getJSONArray("articles").getJSONObject(4).getString("description") + "       SOURCE: " + object.getJSONArray("articles").getJSONObject(0).getJSONObject("source").getString("name");
 
                             //String articleDesc = object.getString("status");
                 responseView.setText(articleTitle);
@@ -226,25 +308,25 @@ public class Page1 extends Activity {
             try {
                 JSONObject object =  new JSONObject(response);
 
-                String articleTitle = object.getJSONArray("articles").getJSONObject(0).getString("title");
+                String articleTitle = object.getJSONArray("articles").getJSONObject(0).getString("title") ;
 
-                String body = object.getJSONArray("articles").getJSONObject(0).getString("description");
+                String body = object.getJSONArray("articles").getJSONObject(0).getString("description") + "       SOURCE: " + object.getJSONArray("articles").getJSONObject(0).getJSONObject("source").getString("name");
 
-                String articleTitle2 = object.getJSONArray("articles").getJSONObject(1).getString("title");
+                String articleTitle2 = object.getJSONArray("articles").getJSONObject(1).getString("title") ;
 
-                String body2 = object.getJSONArray("articles").getJSONObject(1).getString("description");
+                String body2 = object.getJSONArray("articles").getJSONObject(1).getString("description") + "       SOURCE: " + object.getJSONArray("articles").getJSONObject(0).getJSONObject("source").getString("name");
 
-                String articleTitle3 = object.getJSONArray("articles").getJSONObject(2).getString("title");
+                String articleTitle3 = object.getJSONArray("articles").getJSONObject(2).getString("title") ;
 
-                String body3 = object.getJSONArray("articles").getJSONObject(2).getString("description");
+                String body3 = object.getJSONArray("articles").getJSONObject(2).getString("description") + "       SOURCE: " + object.getJSONArray("articles").getJSONObject(0).getJSONObject("source").getString("name");
 
-                String articleTitle4 = object.getJSONArray("articles").getJSONObject(3).getString("title");
+                String articleTitle4 = object.getJSONArray("articles").getJSONObject(3).getString("title") ;
 
-                String body4 = object.getJSONArray("articles").getJSONObject(3).getString("description");
+                String body4 = object.getJSONArray("articles").getJSONObject(3).getString("description") + "       SOURCE: " + object.getJSONArray("articles").getJSONObject(0).getJSONObject("source").getString("name");
 
-                String articleTitle5 = object.getJSONArray("articles").getJSONObject(4).getString("title");
+                String articleTitle5 = object.getJSONArray("articles").getJSONObject(4).getString("title") ;
 
-                String body5 = object.getJSONArray("articles").getJSONObject(4).getString("description");
+                String body5 = object.getJSONArray("articles").getJSONObject(4).getString("description") + "       SOURCE: " + object.getJSONArray("articles").getJSONObject(0).getJSONObject("source").getString("name");
 
                 //String articleDesc = object.getString("status");
                 search1.setText(articleTitle);

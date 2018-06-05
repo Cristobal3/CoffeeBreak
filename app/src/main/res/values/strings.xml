@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Reminders and Notes</string>
+    <string name="app_name">Coffee Break</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
     <string name="android_contentdescription_null">android:contentDescription=@null</string>
